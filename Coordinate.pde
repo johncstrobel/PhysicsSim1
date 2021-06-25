@@ -1,6 +1,11 @@
 public class Coordinate{
   private float x, y;
   
+  public Coordinate(float a, float b){
+    x = a;
+    y = b;
+  }
+  
   public float getX(){
     return x;
   }

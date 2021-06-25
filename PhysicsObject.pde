@@ -1,46 +1,20 @@
-public class PhysicsObject extends MovableObject{
-  private float gravConstant = -10;
- 
-  private boolean movable;
- 
-  public boolean isMovable(){
-    return movable;
-  }
- 
-  public void makeUnmovable(){
-    movable = false; 
-  }
- 
-  public void makeMovable(){
-    movable = true;
+public abstract class PhysicsObject extends MovableObject{ 
+  //distance to each wall?
+  public PhysicsObject(float x, float y){
+    super(x,y);
   }
   
+  public PhysicsObject(float x, float y, float initialXVel, float initialYVel){
+    super(x,y,initialXVel, initialYVel);
+  }
+  
+  public PhysicsObject(float x, float y, float initialXVel, float initialYVel, float initialXAccel, float initialYAccel){
+    super(x,y,initialXVel, initialYVel,initialXAccel,initialYAccel);
+  }
+  
+    
   public void move(){ //moves according to own rules
-    //calculate new velocity
-    float deltaX = xVelocity + xAcceleration;
-    float deltaY = yVelocity + yAcceleration + gravConstant;
-    //apply friction to acceleration
-    //if (xAcceleration > 0){
-    //  xAcceleration -= frictionConstant;
-    //  if (xAcceleration < 0){
-    //    xAcceleration = 0;
-    //  }
-    //} else if (xAcceleration < 0){
-    //  xAcceleration += frictionConstant;
-    //}
-    
-    
-    //change current velocity
-    this.coord.changeX(deltaX);
-    this.coord.changeY(deltaY);
-  }
-  
-  public void collide(){ //what to do on collision
-    println("physicsObject.collide not declared");
-  }
-  
-  public boolean insideObject(Coordinate c){ //returns true if c is inside this object
-    println("physicsObject.insideObject not declared");
-    return true;
-  }
+    super.move();
+    accelerateY(C_GRAVITY);
+  }// move
 }
