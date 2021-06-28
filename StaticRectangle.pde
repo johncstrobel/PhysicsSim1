@@ -1,13 +1,14 @@
-public class StaticObject extends SimObject{ //always squares or rectangles
+public class StaticRectangle extends SimObject{ //always squares or rectangles
   float xDim;
   float yDim;
   
-  public StaticObject(float x, float y, float xd, float yd){
+  public StaticRectangle(float x, float y, float xd, float yd){
     super(x,y);
     xDim = xd;
     yDim = yd;
     movable = false;
     objColor = #000000;
+    shape = "rectangle";
   }
   
   void display(){

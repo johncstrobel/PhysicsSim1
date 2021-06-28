@@ -1,11 +1,16 @@
 void setup(){
- frameRate(60);
+ frameRate(120);
  size(600,500);
  background(200);
  
  //object instantiations
-  c = new UncontrollableCircle(200,100,0,0,0,0);
-  b = new StaticObject (200,200,100,100);
+  c = new UncontrollableCircle(250,100,0,0,0,0);
+  b = new StaticRectangle (200,200,100,100);
+  
+  //DELETE ME 
+  c.closestObject = b;
+  b.closestObject = c;
+  
   //wallN = new StaticObject(0,0,4.9,float(height));
   //wallE = new StaticObject(4.9,0,float(width)-10,4.9);
   //wallS = new StaticObject(0,0,4.9,float(height));
@@ -21,16 +26,16 @@ void setup(){
 }
 
 //constants
-public final float C_GRAVITY = 0.02;
+public final float C_GRAVITY = 0.01;
 public final float C_MAX_VELOCITY = 60;
 
 //object declarations
 UncontrollableCircle c;
-StaticObject b;
-StaticObject wallN;
-StaticObject wallE;
-StaticObject wallS;
-StaticObject wallW;
+StaticRectangle b;
+StaticRectangle wallN;
+StaticRectangle wallE;
+StaticRectangle wallS;
+StaticRectangle wallW;
 SimObject[] objects; 
 
 void draw(){
@@ -44,6 +49,9 @@ void draw(){
     }
   }
   
+  
+  //collide as part of move
+  //draw() updates closestObject for each object
   
   //if(wallN != null){wallN.display();}
   //if(wallE != null){wallE.display();}
