@@ -16,9 +16,10 @@ public class StaticRectangle extends SimObject{ //always squares or rectangles
     rect(coord.getX(),coord.getY(),xDim,yDim);
   }
   
-  
-  
-  
+  public Coordinate getCoord(){
+    return new Coordinate(coord.getX()+(xDim/2), coord.getY()+(yDim/2));
+  }
+ 
   
   //TODO  
   public boolean isColliding(){ //check for collision
