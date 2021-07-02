@@ -34,8 +34,6 @@ public abstract class MovableObject extends SimObject {
     
   }
   
-
-  
   public void move(){ //moves according to own rules
     //change current position
     if(xVelocity > C_MAX_VELOCITY){

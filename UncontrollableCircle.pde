@@ -42,14 +42,15 @@ public class UncontrollableCircle extends PhysicsObject {
   }
   
   public boolean isColliding(){ //check for collision
-    if (closestObject.getShape() == "rectangle"){
+    
+    if (closestObject != null && closestObject.getShape() == "rectangle"){
 
       if (this.getDistance(closestObject) <= this.radius) {
         return true;
       }
     } //if rect
     
-    if (closestObject.getShape() == "circle"){
+    if (closestObject != null && closestObject.getShape() == "circle"){
       UncontrollableCircle tempObj = (UncontrollableCircle) closestObject;
       //float x1 = coord.getX();
       //float x2 = tempObj.coord.getX();
