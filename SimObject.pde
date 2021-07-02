@@ -3,6 +3,7 @@ public abstract class SimObject{
   protected Coordinate coord; //represents center of object
   protected color objColor;
   protected boolean movable;
+  protected String shape;
   
   public SimObject(float x, float y){
     coord = new Coordinate(x,y);
@@ -15,26 +16,31 @@ public abstract class SimObject{
   public Coordinate getCoord(){
     return coord;
   }
+  
   public void setCoord(Coordinate c){
     coord = c;
   }
  
- public SimObject getClosestObject(){
-   return closestObject;
- }
+  public SimObject getClosestObject(){
+    return closestObject;
+  }
  
- public void updateClosestObject(SimObject o){
-   closestObject = o;
- }
+  public void updateClosestObject(SimObject o){
+    closestObject = o;
+  }
+  
+  public String getShape(){
+    return shape;
+  }
  
- public boolean outOfBounds(){
-   if (coord.getX() < 0 || coord.getX() > width){
-     return true;
-   } else if (coord.getY() < 0 || coord.getY() > height){
-     return true;
-   }
-   return false;
- }
+  public boolean outOfBounds(){
+    if (coord.getX() < 0 || coord.getX() > width){
+      return true;
+    } else if (coord.getY() < 0 || coord.getY() > height){
+      return true;
+    }
+    return false;
+  }
  
   public abstract void display();
  
