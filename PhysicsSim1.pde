@@ -5,8 +5,13 @@ void setup(){
  
  //object instantiations
   c = new UncontrollableCircle(100,250,0,0,0,0);
-  b = new StaticRectangle (200,200,100,100);
+  b = new StaticRectangle (150,200,100,100);
   d = new UncontrollableCircle(30, 250,0,0,0,0);
+  e = new StaticRectangle (100,370,100,100);
+  c.toggleClosestObjectLine(true);
+  b.toggleClosestObjectLine(true);
+  e.toggleClosestObjectLine(true);
+  d.toggleClosestObjectLine(true);
   
   //DELETE ME 
   c.closestObject = b;
@@ -20,7 +25,7 @@ void setup(){
   objects = new SimObject[7];
   objects[0] = c;
   objects[1] = b;
-  //objects[2] = wallN;
+  objects[2] = e;
   //objects[3] = wallE;
   //objects[4] = wallS;
   //objects[5] = wallW;
@@ -38,6 +43,7 @@ public boolean PAUSED = false;
 UncontrollableCircle c;
 StaticRectangle b;
 UncontrollableCircle d;
+StaticRectangle e;
 //StaticRectangle wallN;
 //StaticRectangle wallE;
 //StaticRectangle wallS;
@@ -56,11 +62,22 @@ void mousePressed(){
 
 void updateClosestObjects(){
   for (int i = 0; i < objects.length; i++){
-    if (objects[i] != null){
-      
-    }
-  }
-}
+    for (int j = 0; j < objects.length; j++){
+      if (objects[i] != null && objects[j] != null && !objects[i].equals(objects[j])){
+        if (objects[i].getClosestObject() == null){
+          objects[i].setClosestObject(objects[j]); 
+        } else { //compare distance
+          float dist1 = objects[i].getDistance(objects[i].getClosestObject());
+          float dist2 = objects[i].getDistance(objects[j]);
+          if (dist1 > dist2){
+            objects[i].setClosestObject(objects[j]);
+            println("closest object changed");
+          } // if dist
+        } 
+      } // if objects not null, not same object
+    } // for j
+  } //for i
+} //updateClosestObjects
 
 
 
@@ -73,6 +90,7 @@ void draw(){
         objects[i].display();
         if (objects[i].movable){
           objects[i].move();
+          updateClosestObjects();
         }//movable
       }//displayable
     }//for
@@ -80,14 +98,5 @@ void draw(){
     fill(#FFFFFF);
     text("PAUSED",10,10);
   }//paused
-  
-  
-  //collide as part of move
-  //draw() updates closestObject for each object
-  
-  //if(wallN != null){wallN.display();}
-  //if(wallE != null){wallE.display();}
-  //if(wallS != null){wallS.display();}
-  //if(wallW != null){wallW.display();}
   
 }

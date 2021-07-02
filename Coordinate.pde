@@ -29,4 +29,8 @@ public class Coordinate{
   public void changeY(float a){
     y += a;
   }
+  
+  public float distance(Coordinate other){
+    return sqrt(pow((x-other.getX()),2)+pow((y-other.getY()),2));
+  }
 }

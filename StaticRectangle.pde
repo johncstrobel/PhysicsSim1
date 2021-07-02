@@ -11,13 +11,19 @@ public class StaticRectangle extends SimObject{ //always squares or rectangles
     shape = "rectangle";
   }
   
+  
   void display(){
     fill(objColor);
     rect(coord.getX(),coord.getY(),xDim,yDim);
+    displayClosestObjectLine();
   }
   
-  public Coordinate getCoord(){
+  public Coordinate getCenterCoord(){
     return new Coordinate(coord.getX()+(xDim/2), coord.getY()+(yDim/2));
+  }
+  
+  public Coordinate getUpperLeftCoord(){
+    return coord;    
   }
  
   

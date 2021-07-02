@@ -57,8 +57,9 @@ public abstract class MovableObject extends SimObject {
 
     //teleport to safe space again if out of bounds
     if (this.outOfBounds()){ 
-      this.coord.setX(100);
-      this.coord.setY(100);
+      
+      //this.coord.setX(100);
+      //this.coord.setY(100);
       xAcceleration = 0;
       yAcceleration = 0;
       xVelocity = 0;
