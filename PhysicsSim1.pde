@@ -13,16 +13,12 @@ void setup(){
   e.toggleClosestObjectLine(true);
   d.toggleClosestObjectLine(true);
   
-  //DELETE ME 
-  c.closestObject = b;
-  b.closestObject = c;
-  d.closestObject = c;
   
   //wallN = new StaticObject(0,0,4.9,float(height));
   //wallE = new StaticObject(4.9,0,float(width)-10,4.9);
   //wallS = new StaticObject(0,0,4.9,float(height));
   //wallW = new StaticObject(4.9,0,float(width)-10,4.9);
-  objects = new SimObject[7];
+  objects = new SimObject[20];
   objects[0] = c;
   objects[1] = b;
   objects[2] = e;
@@ -53,10 +49,22 @@ SimObject[] objects;
 
 //simulation methods
 void mousePressed(){
-  if(PAUSED){
-    PAUSED = false;
-  } else {
-    PAUSED = true;
+  boolean spawned = false;
+  for (int i = 0; i < objects.length; i++){
+    if(objects[i] == null){
+      objects[i] = new UncontrollableCircle(mouseX,mouseY);
+      spawned = true;
+      break;
+    }
+  }
+  //if(!spawned){
+    
+}
+
+void keyPressed(){
+  if (key == ' '){
+    if(PAUSED){PAUSED = false;}
+    else {PAUSED = true;}
   }
 }
 
