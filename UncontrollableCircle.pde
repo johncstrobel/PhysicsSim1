@@ -44,19 +44,16 @@ public class UncontrollableCircle extends PhysicsObject {
   public boolean isColliding(){ //check for collision
     
     if (closestObject != null && closestObject.getShape() == "rectangle"){
-
-      if (this.getDistance(closestObject) <= this.radius) {
+      println("getDistance: "+this.getDistance(closestObject));
+      println("radius: " + this.radius);
+      
+      if (this.getDistance(closestObject) <= 0) {
         return true;
       }
     } //if rect
     
     if (closestObject != null && closestObject.getShape() == "circle"){
       UncontrollableCircle tempObj = (UncontrollableCircle) closestObject;
-      //float x1 = coord.getX();
-      //float x2 = tempObj.coord.getX();
-      //float y1 = coord.getY();
-      //float y2 = tempObj.coord.getY();
-      //float distance = sqrt(pow((x2-x1),2) + pow((y2-y1),2));
       if (this.getDistance(tempObj) < this.radius + tempObj.getRadius()){
         return true;
       }
