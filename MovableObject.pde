@@ -25,15 +25,19 @@ public abstract class MovableObject extends SimObject {
     yAcceleration = initialYAccel;
   }  
   
+  public void setXAcceleration(float x){xAcceleration = x;}
+  public void setYAcceleration(float y){yAcceleration = y;}
+  public void setXVelocity(float x){xVelocity = x;}
+  public void setYVelocity(float y){yVelocity = y;}
+  
   public void accelerateX(float delta){
     xVelocity = xVelocity + delta;
   }
   
   public void accelerateY(float delta){
     yVelocity = yVelocity + delta;
-    
   }
-  
+    
   public void move(){ //moves according to own rules
     //change current position
     if(xVelocity > C_MAX_VELOCITY){
@@ -46,18 +50,13 @@ public abstract class MovableObject extends SimObject {
     } else {
       this.coord.changeY(yVelocity);
     }
-
-    
-    
     //change current velocity
     accelerateX(xAcceleration);
     accelerateY(yAcceleration);
-
     //teleport to safe space again if out of bounds
     if (this.outOfBounds()){ 
-      
-      //this.coord.setX(100);
-      //this.coord.setY(100);
+      this.coord.setX(100);
+      this.coord.setY(100);
       xAcceleration = 0;
       yAcceleration = 0;
       xVelocity = 0;

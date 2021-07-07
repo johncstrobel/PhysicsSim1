@@ -43,26 +43,50 @@ public class UncontrollableCircle extends PhysicsObject {
   
   public boolean isColliding(){ //check for collision
     
-    if (closestObject != null && closestObject.getShape() == "rectangle"){
-      println("getDistance: "+this.getDistance(closestObject));
-      println("radius: " + this.radius);
-      
+    if (closestObject != null && closestObject.getShape() == "rectangle"){      
       if (this.getDistance(closestObject) <= 0) {
         return true;
       }
     } //if rect
     
-    if (closestObject != null && closestObject.getShape() == "circle"){
-      UncontrollableCircle tempObj = (UncontrollableCircle) closestObject;
-      if (this.getDistance(tempObj) < this.radius + tempObj.getRadius()){
-        return true;
-      }
-    }
+    //if (closestObject != null && closestObject.getShape() == "circle"){
+    //  UncontrollableCircle tempObj = (UncontrollableCircle) closestObject;
+    //  if (this.getDistance(tempObj) < this.radius + tempObj.getRadius()){
+    //    return true;
+    //  }
+    //}//if circle
     
     return false;
   }//isColliding
   
   public void collideWithRectangle(){
+    //find direction in which we are colliding
+    float cx = this.coord.getX();//rect's closest edges
+    float cy = this.coord.getY();
+    float testx = cx;
+    float testy = cy;
+    StaticRectangle tempObj = (StaticRectangle)closestObject;
+    Coordinate tempCoord = tempObj.getUpperLeftCoord();
+    float rx = tempCoord.getX();
+    float ry = tempCoord.getY();
+    float rw = tempObj.xDim;
+    float rh = tempObj.yDim;
+    
+    if ((cx+radius) < rx || (cx+radius) > rx+rw) { //circle is to the left or right of the rectangle
+      this.setXVelocity(0-xVelocity);
+    }
+    //else if () {} //circle is to the right of the rectangle
+    else if ((cy+radius) < ry || (cy+radius) > ry+rh) {
+      this.setYVelocity(0-yVelocity);
+    } //circle is above or below rectangle
+    //else if () {} //circle is below rectangle
+
+    
+    
+    //if S or N, reverse Y velocity, do not change x
+    //if W or e, reverse X velocity, do not change Y
+    
+    
     //xVelocity = 0-xVelocity;
     //yVelocity = 0-yVelocity;
     xVelocity = 0-xVelocity;

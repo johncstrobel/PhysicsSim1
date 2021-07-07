@@ -56,7 +56,13 @@ void mousePressed(){
   boolean spawned = false;
   for (int i = 0; i < objects.length; i++){
     if(objects[i] == null){
-      objects[i] = new UncontrollableCircle(mouseX,mouseY);
+      if(mouseButton == LEFT){
+        objects[i] = new UncontrollableCircle(mouseX,mouseY,-1,0);
+      } else if (mouseButton == RIGHT){
+        objects[i] = new UncontrollableCircle(mouseX,mouseY,1,0);
+      } else if (mouseButton == CENTER){
+        objects[i] = new UncontrollableCircle(mouseX,mouseY,0,-1);
+      }
       spawned = true;
       break;
     }

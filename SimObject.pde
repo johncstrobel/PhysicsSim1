@@ -84,8 +84,8 @@ public abstract class SimObject{
         float testx = cx;//rect's closest edges
         float testy = cy;
         
-        if (cx < rx) {testx = rx;}//right edge
-        else if (cx > rx+rw) {testx = rx+rw;} //left edge
+        if (cx < rx) {testx = rx;}//left edge
+        else if (cx > rx+rw) {testx = rx+rw;} //right edge
         if (cy < ry) {testy = ry;}//top edge
         else if (cy > ry+rh) {testy = ry+rh;}//bottom edge
         
