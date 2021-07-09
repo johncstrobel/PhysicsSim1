@@ -1,8 +1,13 @@
+import igeo.*;
+import igeo.gui.*;
+import igeo.io.*;
+import igeo.p.*;
+
 //------------------------------------------------------------------------------------------------------------------------
 //--VARIABLES-------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
 public final float C_GRAVITY = 0.01;
-public final float C_X_GRAVITY = 0;
+public final float C_X_GRAVITY = -0.0001;
 public final float C_MAX_VELOCITY = 60;
 public boolean PAUSED = false;
 
@@ -57,10 +62,13 @@ void mousePressed(){
     if(objects[i] == null){
       if(mouseButton == LEFT){
         objects[i] = new UncontrollableCircle(mouseX,mouseY,-1,0);
+        objects[i].toggleClosestObjectLine(true);
       } else if (mouseButton == RIGHT){
         objects[i] = new UncontrollableCircle(mouseX,mouseY,1,0);
+        objects[i].toggleClosestObjectLine(true);
       } else if (mouseButton == CENTER){
         objects[i] = new UncontrollableCircle(mouseX,mouseY,0,-1);
+        objects[i].toggleClosestObjectLine(true);
       }
       spawned = true;
       break;
@@ -81,7 +89,7 @@ void keyPressed(){
 //------------------------------------------------------------------------------------------------------------------------
 
 void setup(){
- frameRate(60);
+ frameRate(120);
  size(600,500);
  background(200);
  
