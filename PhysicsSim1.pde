@@ -30,7 +30,6 @@ void updateClosestObjects(){
           float dist2 = objects[i].getDistance(objects[j]);
           if (dist1 > dist2){
             objects[i].setClosestObject(objects[j]);
-            println("closest object changed");
           } // if dist
         } 
       } // if objects not null, not same object
@@ -114,6 +113,9 @@ void draw(){
         objects[i].display();
         if (objects[i].movable){
           objects[i].move();
+          if( objects[i].outOfBounds()){
+            objects[i] = null;
+          }
           updateClosestObjects();
         }//movable
       }//displayable

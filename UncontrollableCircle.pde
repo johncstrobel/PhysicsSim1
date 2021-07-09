@@ -47,15 +47,7 @@ public class UncontrollableCircle extends PhysicsObject {
       if (this.getDistance(closestObject) <= 0) {
         return true;
       }
-    } //if rect
-    
-    //if (closestObject != null && closestObject.getShape() == "circle"){
-    //  UncontrollableCircle tempObj = (UncontrollableCircle) closestObject;
-    //  if (this.getDistance(tempObj) < this.radius + tempObj.getRadius()){
-    //    return true;
-    //  }
-    //}//if circle
-    
+    } //if rect   
     return false;
   }//isColliding
   
@@ -70,28 +62,17 @@ public class UncontrollableCircle extends PhysicsObject {
     float rx = tempCoord.getX();
     float ry = tempCoord.getY();
     float rw = tempObj.xDim;
-    float rh = tempObj.yDim;
+    float rh = tempObj.yDim;    
     
-    if ((cx+radius) < rx || (cx+radius) > rx+rw) { //circle is to the left or right of the rectangle
+    if ((cx) < rx || (cx) > (rx+rw)) { //circle is to the left or right of the rectangle
       this.setXVelocity(0-xVelocity);
+      println("collided with side");
     }
-    //else if () {} //circle is to the right of the rectangle
-    else if ((cy+radius) < ry || (cy+radius) > ry+rh) {
+    //else if () {} //circle is above or below rectangle
+    else if ((cy) < ry || (cy) > (ry+rh)) {
       this.setYVelocity(0-yVelocity);
+      println("collided with top/bottom");
     } //circle is above or below rectangle
-    //else if () {} //circle is below rectangle
-
-    
-    
-    //if S or N, reverse Y velocity, do not change x
-    //if W or e, reverse X velocity, do not change Y
-    
-    
-    //xVelocity = 0-xVelocity;
-    //yVelocity = 0-yVelocity;
-    xVelocity = 0-xVelocity;
-    yVelocity = 0-yVelocity;
-    println("UncontrollableCircle.collideWithRectangle(): needs work");
   }
   
   
