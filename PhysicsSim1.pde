@@ -30,7 +30,6 @@ void updateClosestObjects(){
           float dist2 = objects[i].getDistance(objects[j]);
           if (dist1 > dist2){
             objects[i].setClosestObject(objects[j]);
-            println("closest object changed");
           } // if dist
         } 
       } // if objects not null, not same object
@@ -56,7 +55,13 @@ void mousePressed(){
   boolean spawned = false;
   for (int i = 0; i < objects.length; i++){
     if(objects[i] == null){
-      objects[i] = new UncontrollableCircle(mouseX,mouseY);
+      if(mouseButton == LEFT){
+        objects[i] = new UncontrollableCircle(mouseX,mouseY,-1,0);
+      } else if (mouseButton == RIGHT){
+        objects[i] = new UncontrollableCircle(mouseX,mouseY,1,0);
+      } else if (mouseButton == CENTER){
+        objects[i] = new UncontrollableCircle(mouseX,mouseY,0,-1);
+      }
       spawned = true;
       break;
     }
@@ -108,6 +113,9 @@ void draw(){
         objects[i].display();
         if (objects[i].movable){
           objects[i].move();
+          if( objects[i].outOfBounds()){
+            objects[i] = null;
+          }
           updateClosestObjects();
         }//movable
       }//displayable
