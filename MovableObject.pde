@@ -1,58 +1,60 @@
 public abstract class MovableObject extends SimObject { 
-  protected float xVelocity;
-  protected float yVelocity;
+  //protected float xVelocity;
+  //protected float yVelocity;
+  protected IVec velocity;
+  protected IVec acceleration;
   protected float xAcceleration;
   protected float yAcceleration;
   
   public MovableObject(float x, float y){
     super(x,y);
     movable = true;
+    velocity = new IVec(0,0,0);
+    acceleration = new IVec(0,0,0);
   }
 
   public MovableObject(float x, float y, float initialXVel, float initialYVel){
     super(x,y);
     movable = true;
-    xVelocity = initialXVel;
-    yVelocity = initialYVel;
+    velocity = new IVec(initialXVel,initialYVel,0);
+    acceleration = new IVec(0,0,0);
+    
   }  
   
   public MovableObject(float x, float y, float initialXVel, float initialYVel, float initialXAccel, float initialYAccel){
     super(x,y);
     movable = true;
-    xVelocity = initialXVel;
-    yVelocity = initialYVel;
-    xAcceleration = initialXAccel;
-    yAcceleration = initialYAccel;
+    velocity = new IVec(initialXVel,initialYVel,0);
+    acceleration = new IVec(initialXAccel,initialYAccel,0);
   }  
   
-  public void setXAcceleration(float x){xAcceleration = x;}
-  public void setYAcceleration(float y){yAcceleration = y;}
-  public void setXVelocity(float x){xVelocity = x;}
-  public void setYVelocity(float y){yVelocity = y;}
+  public void setVelocity(IVec newVel){velocity = newVel;}
+  public IVec getVelocity(){return velocity;}
+  public void setAcceleration(IVec newAccel){acceleration = newAccel;}
+  public IVec getAcceleration(){return acceleration;}
   
-  public void accelerateX(float delta){
-    xVelocity = xVelocity + delta;
+  public void accelerateVector(IVec delta){
+    velocity.add(delta);
   }
   
-  public void accelerateY(float delta){
-    yVelocity = yVelocity + delta;
+  public void addAcceleration(IVec delta){
+    acceleration.add(delta);
   }
     
   public void move(){ //moves according to own rules
     //change current position
-    if(xVelocity > C_MAX_VELOCITY){
+    if(velocity.x() > C_MAX_VELOCITY){
       this.coord.changeX(C_MAX_VELOCITY);
     } else {
-      this.coord.changeX(xVelocity);
+      this.coord.changeX(velocity.x());
     }
-    if(yVelocity > C_MAX_VELOCITY){
+    if(velocity.y() > C_MAX_VELOCITY){
       this.coord.changeY(C_MAX_VELOCITY);
     } else {
-      this.coord.changeY(yVelocity);
+      this.coord.changeY(velocity.y());
     }
     //change current velocity
-    accelerateX(xAcceleration);
-    accelerateY(yAcceleration);
+    accelerateVector(acceleration);
   }// move
    
 }

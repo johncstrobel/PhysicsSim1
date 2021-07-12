@@ -59,9 +59,11 @@ public class UncontrollableCircle extends PhysicsObject {
     float rh = tempObj.yDim;    
     
     if ((cx) < rx || (cx) > (rx+rw)) { //circle is to the left or right of the rectangle
-      this.setXVelocity(0-xVelocity);
+      this.setVelocity(new IVec(0-velocity.x(),velocity.y(),0));
+      //this.setXVelocity(0-xVelocity);
     } else if ((cy) < ry || (cy) > (ry+rh)) { //circle is above or below rectangle
-      this.setYVelocity(0-yVelocity);
+      this.setVelocity(new IVec(velocity.x(),0-velocity.y(),0));
+      //this.setYVelocity(0-yVelocity);
     } 
   }
   
@@ -83,8 +85,11 @@ public class UncontrollableCircle extends PhysicsObject {
     
     //new velocity = 2 * (-perpindicular velocity), parallel velocity stays same
     
-    this.setXVelocity(0-xVelocity);
-    this.setYVelocity(0-yVelocity);
+    //this.setXVelocity(0-xVelocity);
+    //this.setYVelocity(0-yVelocity);
+    
+    this.setVelocity(new IVec(0-velocity.x(),velocity.y(),0));
+    this.setVelocity(new IVec(velocity.x(),0-velocity.y(),0));
     
   }
   

@@ -6,8 +6,7 @@ import igeo.p.*;
 //------------------------------------------------------------------------------------------------------------------------
 //--VARIABLES-------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
-public final float C_GRAVITY = 0.01;
-public final float C_X_GRAVITY = -0.0001;
+public final IVec C_GRAVITY = new IVec(-0.001,0.01,0);//combine x and y gravity into the same vector
 public final float C_MAX_VELOCITY = 60;
 public boolean PAUSED = false;
 

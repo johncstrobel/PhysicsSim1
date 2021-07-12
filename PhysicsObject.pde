@@ -15,7 +15,8 @@ public abstract class PhysicsObject extends MovableObject{
     
   public void move(){ //moves according to own rules
     super.move();
-    accelerateY(C_GRAVITY);
-    accelerateX(C_X_GRAVITY);
+    //accelerateY(C_GRAVITY);
+    //accelerateX(C_X_GRAVITY);
+    accelerateVector(C_GRAVITY);
   }// move
 }

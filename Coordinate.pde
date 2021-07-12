@@ -24,11 +24,20 @@ public class Coordinate{
   
   public void changeX(float a){
     x += a;
-  }
+  }  
   
   public void changeY(float a){
     y += a;
   }
+
+  public void changeX(double a){
+    x += a;
+  }
+  
+  public void changeY(double a){
+    y += a;
+  }
+  
   
   public float distance(Coordinate other){
     return sqrt(pow((x-other.getX()),2)+pow((y-other.getY()),2));
