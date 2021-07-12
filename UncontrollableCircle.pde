@@ -51,12 +51,12 @@ public class UncontrollableCircle extends PhysicsObject {
     float cy = this.coord.getY();
     float testx = cx;
     float testy = cy;
-    StaticRectangle tempObj = (StaticRectangle)closestObject;
-    Coordinate tempCoord = tempObj.getUpperLeftCoord();
+    StaticRectangle other = (StaticRectangle)closestObject;
+    Coordinate tempCoord = other.getUpperLeftCoord();
     float rx = tempCoord.getX();
     float ry = tempCoord.getY();
-    float rw = tempObj.xDim;
-    float rh = tempObj.yDim;    
+    float rw = other.xDim;
+    float rh = other.yDim;    
     
     if ((cx) < rx || (cx) > (rx+rw)) { //circle is to the left or right of the rectangle
       this.setVelocity(new IVec(0-velocity.x(),velocity.y(),0));
@@ -68,16 +68,29 @@ public class UncontrollableCircle extends PhysicsObject {
   }
   
   public void collideWithCircle(){ // math comes from here: https://flatredball.com/documentation/tutorials/math/circle-collision/
-    UncontrollableCircle tempObj = (UncontrollableCircle) closestObject;
+    UncontrollableCircle other = (UncontrollableCircle) closestObject;
     float cx1 = this.coord.getX();
     float cy1 = this.coord.getY();
     float cx2 = closestObject.coord.getX();
     float cy2 = closestObject.coord.getY();
     float rad1 = this.radius;
-    float rad2 = tempObj.radius;
+    float rad2 = other.radius;
     
     // find point of impact
-    Coordinate impactPoint = new Coordinate(0,0);                                                                                                                          
+    Coordinate impactPoint = new Coordinate(0,0);      
+    
+    
+    IVec relDiff = new IVec(cx1-cx2,cy1-cy2,0);
+    IVec relVel = this.velocity.dup();
+    relVel.sub(other.getVelocity());
+    double distance = relVel.len();
+    if(distance < (rad1+rad2)){
+      IVec normal = relDiff.unit();
+      if(relVel.dot(normal) < 0){
+        //relVel = relVel - (1/*+bounce*/)* normal*relVel.dot(normal);
+        //relVel.sub(relVel.dot(normal).mul(normal.mul(1)));
+      }
+    }
     
     //find "tangent line" between two circles
     
