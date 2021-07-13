@@ -80,30 +80,21 @@ public class UncontrollableCircle extends PhysicsObject {
     Coordinate impactPoint = new Coordinate(0,0);      
     
     
-    IVec relDiff = new IVec(cx1-cx2,cy1-cy2,0);
+    IVec relDiff = new IVec(cx1-cx2,cy1-cy2,0); // vector with
     IVec relVel = this.velocity.dup();
     relVel.sub(other.getVelocity());
     double distance = relVel.len();
     if(distance < (rad1+rad2)){
       IVec normal = relDiff.unit();
       if(relVel.dot(normal) < 0){
-        //relVel = relVel - (1/*+bounce*/)* normal*relVel.dot(normal);
-        //relVel.sub(relVel.dot(normal).mul(normal.mul(1)));
+        //relVel = relVel - (1+C_BOUNCE)* normal*relVel.dot(normal);
+        normal.mul(relVel.dot(normal)); //mul transforms normal
+        normal.mul(C_BOUNCE);
+        relVel.sub(normal);
+        this.velocity.add(other.velocity);
+        this.velocity.add(relVel);
       }
-    }
-    
-    //find "tangent line" between two circles
-    
-    //split my velocity into two vectors (parallel to tangent and perpindicular to tangent)
-    
-    //new velocity = 2 * (-perpindicular velocity), parallel velocity stays same
-    
-    //this.setXVelocity(0-xVelocity);
-    //this.setYVelocity(0-yVelocity);
-    
-    this.setVelocity(new IVec(0-velocity.x(),velocity.y(),0));
-    this.setVelocity(new IVec(velocity.x(),0-velocity.y(),0));
-    
+    }    
   }
   
   

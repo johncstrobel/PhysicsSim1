@@ -6,8 +6,9 @@ import igeo.p.*;
 //------------------------------------------------------------------------------------------------------------------------
 //--VARIABLES-------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
-public final IVec C_GRAVITY = new IVec(-0.001,0.01,0);//combine x and y gravity into the same vector
-public final float C_MAX_VELOCITY = 60;
+public final IVec C_GRAVITY = new IVec(0,0.01,0); // combine x and y gravity into the same vector
+public final float C_MAX_VELOCITY = 10; // maximum velocity
+public final float C_BOUNCE = 0.98; // percentage of "energy" conserved in collisions
 public boolean PAUSED = false;
 
 //object declarations
@@ -88,7 +89,7 @@ void keyPressed(){
 //------------------------------------------------------------------------------------------------------------------------
 
 void setup(){
- frameRate(120);
+ frameRate(60);
  size(600,500);
  background(200);
  
