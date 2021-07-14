@@ -6,6 +6,7 @@ public class UncontrollableCircle extends PhysicsObject {
     radius = 15;
     objColor = #C97676;
     shape = "circle";
+    displayVectors = true;
   }
   
   public UncontrollableCircle(float x, float y, float initialXVelocity, float initialYVelocity){
@@ -13,6 +14,7 @@ public class UncontrollableCircle extends PhysicsObject {
     radius = 15;
     objColor = #C97676;
     shape = "circle";
+    displayVectors = true;
   }
   
   public UncontrollableCircle(float x, float y, float initialXVel, float initialYVel, float initialXAccel, float initialYAccel){
@@ -20,12 +22,14 @@ public class UncontrollableCircle extends PhysicsObject {
     radius = 15;
     objColor = #C97676;
     shape = "circle";
+    displayVectors = true;
   }
     
   public void display(){
     fill(objColor);
     circle(coord.getX(),coord.getY(),radius*2);    
     displayClosestObjectLine();
+    super.display();
   }
   
   public float getRadius(){
@@ -59,10 +63,10 @@ public class UncontrollableCircle extends PhysicsObject {
     float rh = other.yDim;    
     
     if ((cx) < rx || (cx) > (rx+rw)) { //circle is to the left or right of the rectangle
-      this.setVelocity(new IVec(0-velocity.x(),velocity.y(),0));
+      this.setVelocity(new IVec(0-(velocity.x()*C_BOUNCE),velocity.y(),0));
       //this.setXVelocity(0-xVelocity);
     } else if ((cy) < ry || (cy) > (ry+rh)) { //circle is above or below rectangle
-      this.setVelocity(new IVec(velocity.x(),0-velocity.y(),0));
+      this.setVelocity(new IVec(velocity.x(),0-(velocity.y()*C_BOUNCE),0));
       //this.setYVelocity(0-yVelocity);
     } 
   }
@@ -91,8 +95,8 @@ public class UncontrollableCircle extends PhysicsObject {
         normal.mul(relVel.dot(normal)); //mul transforms normal
         normal.mul(C_BOUNCE);
         relVel.sub(normal);
-        this.velocity.add(other.velocity);
-        this.velocity.add(relVel);
+        //this.velocity.add(other.velocity);
+        //this.velocity.add(relVel);
       }
     }    
   }

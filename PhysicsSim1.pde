@@ -8,7 +8,8 @@ import igeo.p.*;
 //------------------------------------------------------------------------------------------------------------------------
 public final IVec C_GRAVITY = new IVec(0,0.01,0); // combine x and y gravity into the same vector
 public final float C_MAX_VELOCITY = 10; // maximum velocity
-public final float C_BOUNCE = 0.98; // percentage of "energy" conserved in collisions
+public final float C_BOUNCE = 0.8; // percentage of "energy" conserved in collisions
+public final float C_SCALE = 30; // amount to scale display vectors
 public boolean PAUSED = false;
 
 //object declarations
