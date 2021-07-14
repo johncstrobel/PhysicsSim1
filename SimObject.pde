@@ -5,6 +5,7 @@ public abstract class SimObject{
   protected boolean movable;
   protected String shape;
   protected boolean displayClosestObject;
+    protected boolean displayVectors;
   
   public SimObject(float x, float y){
     coord = new Coordinate(x,y);
@@ -128,7 +129,7 @@ public abstract class SimObject{
   }
  
   public abstract void display();
- 
+  
   public abstract boolean isColliding(); //check for collision
  
   public abstract void collide(); //what to do on collision
