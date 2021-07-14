@@ -80,10 +80,6 @@ public class UncontrollableCircle extends PhysicsObject {
     float rad1 = this.radius;
     float rad2 = other.radius;
     
-    // find point of impact
-    Coordinate impactPoint = new Coordinate(0,0);      
-    
-    
     IVec relDiff = new IVec(cx1-cx2,cy1-cy2,0); // vector with
     IVec relVel = this.velocity.dup();
     relVel.sub(other.getVelocity());
@@ -91,12 +87,12 @@ public class UncontrollableCircle extends PhysicsObject {
     if(distance < (rad1+rad2)){
       IVec normal = relDiff.unit();
       if(relVel.dot(normal) < 0){
-        //relVel = relVel - (1+C_BOUNCE)* normal*relVel.dot(normal);
-        normal.mul(relVel.dot(normal)); //mul transforms normal
+        double dotValue = relVel.dot(normal);
+        normal.mul(dotValue); //mul transforms normal
         normal.mul(C_BOUNCE);
         relVel.sub(normal);
-        //this.velocity.add(other.velocity);
-        //this.velocity.add(relVel);
+        this.velocity.add(other.velocity);
+        this.velocity.add(relVel);
       }
     }    
   }
