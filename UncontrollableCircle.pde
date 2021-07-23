@@ -46,12 +46,18 @@ public class UncontrollableCircle extends PhysicsObject {
   }
   
   public boolean isColliding(){ //check for collision
-    return (closestObject != null && this.getDistance(closestObject) <= 0);
+    
+    if (closestObject != null && closestObject.getShape() == "rectangle"){      
+      if (this.getDistance(closestObject) <= 0) {
+        return true;
+      }
+    } //if rect   
+    return false;
   }//isColliding
   
   public void collideWithRectangle(){
     //find direction in which we are colliding
-    float cx = this.coord.getX();
+    float cx = this.coord.getX();//rect's closest edges
     float cy = this.coord.getY();
     float testx = cx;
     float testy = cy;
@@ -101,10 +107,6 @@ public class UncontrollableCircle extends PhysicsObject {
   public void collide(){ //what to do on collision
     if (closestObject.getShape() == "rectangle") {
       this.collideWithRectangle();
-    } else if(closestObject.getShape() == "circle") {
-      this.collideWithCircle();
-    } else {
-      throw new RuntimeException("UncontrollableCircle.collide(): closestObject has invalid shape");
     }
   }
   

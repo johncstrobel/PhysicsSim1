@@ -1,8 +1,6 @@
 public abstract class MovableObject extends SimObject { 
-  //protected float xVelocity;
-  //protected float yVelocity;
-  protected IVec velocity;
-  protected IVec acceleration;
+  protected float xVelocity;
+  protected float yVelocity;
   protected float xAcceleration;
   protected float yAcceleration;
   protected boolean displayVectors; 
@@ -10,30 +8,30 @@ public abstract class MovableObject extends SimObject {
   public MovableObject(float x, float y){
     super(x,y);
     movable = true;
-    velocity = new IVec(0,0,0);
-    acceleration = new IVec(0,0,0);
   }
 
   public MovableObject(float x, float y, float initialXVel, float initialYVel){
     super(x,y);
     movable = true;
-    velocity = new IVec(initialXVel,initialYVel,0);
-    acceleration = new IVec(0,0,0);
-    
+    xVelocity = initialXVel;
+    yVelocity = initialYVel;
   }  
   
   public MovableObject(float x, float y, float initialXVel, float initialYVel, float initialXAccel, float initialYAccel){
     super(x,y);
     movable = true;
-    velocity = new IVec(initialXVel,initialYVel,0);
-    acceleration = new IVec(initialXAccel,initialYAccel,0);
+    xVelocity = initialXVel;
+    yVelocity = initialYVel;
+    xAcceleration = initialXAccel;
+    yAcceleration = initialYAccel;
   }  
   
-  public void setVelocity(IVec newVel){velocity = newVel;}
-  public IVec getVelocity(){return velocity;}
-  public void setAcceleration(IVec newAccel){acceleration = newAccel;}
-  public IVec getAcceleration(){return acceleration;}
+  public void setXAcceleration(float x){xAcceleration = x;}
+  public void setYAcceleration(float y){yAcceleration = y;}
+  public void setXVelocity(float x){xVelocity = x;}
+  public void setYVelocity(float y){yVelocity = y;}
   
+
   public void toggleDisplayVectors(boolean b){
     displayVectors = b;
   }
@@ -41,25 +39,22 @@ public abstract class MovableObject extends SimObject {
   public void accelerateVector(IVec delta){
     velocity.add(delta);
   }
-  
-  public void addAcceleration(IVec delta){
-    acceleration.add(delta);
-  }
     
   public void move(){ //moves according to own rules
     //change current position
-    if(velocity.x() > C_MAX_VELOCITY){
+    if(xVelocity > C_MAX_VELOCITY){
       this.coord.changeX(C_MAX_VELOCITY);
     } else {
-      this.coord.changeX(velocity.x());
+      this.coord.changeX(xVelocity);
     }
-    if(velocity.y() > C_MAX_VELOCITY){
+    if(yVelocity > C_MAX_VELOCITY){
       this.coord.changeY(C_MAX_VELOCITY);
     } else {
-      this.coord.changeY(velocity.y());
+      this.coord.changeY(yVelocity);
     }
     //change current velocity
-    accelerateVector(acceleration);
+    accelerateX(xAcceleration);
+    accelerateY(yAcceleration);
   }// move
    
   public void arrow(float x1, float y1, float x2, float y2) {

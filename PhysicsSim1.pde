@@ -1,15 +1,12 @@
-import igeo.*;
-import igeo.gui.*;
-import igeo.io.*;
-import igeo.p.*;
-
 //------------------------------------------------------------------------------------------------------------------------
 //--VARIABLES-------------------------------------------------------------------------------------------------------------
 //------------------------------------------------------------------------------------------------------------------------
+
 public final IVec C_GRAVITY = new IVec(0,0.01,0); // combine x and y gravity into the same vector
 public final float C_MAX_VELOCITY = 10; // maximum velocity
 public final float C_BOUNCE = 0.8; // percentage of "energy" conserved in collisions
 public final float C_SCALE = 30; // amount to scale display vectors
+
 public boolean PAUSED = false;
 
 //object declarations
@@ -63,13 +60,10 @@ void mousePressed(){
     if(objects[i] == null){
       if(mouseButton == LEFT){
         objects[i] = new UncontrollableCircle(mouseX,mouseY,-1,0);
-        objects[i].toggleClosestObjectLine(true);
       } else if (mouseButton == RIGHT){
         objects[i] = new UncontrollableCircle(mouseX,mouseY,1,0);
-        objects[i].toggleClosestObjectLine(true);
       } else if (mouseButton == CENTER){
         objects[i] = new UncontrollableCircle(mouseX,mouseY,0,-1);
-        objects[i].toggleClosestObjectLine(true);
       }
       spawned = true;
       break;
